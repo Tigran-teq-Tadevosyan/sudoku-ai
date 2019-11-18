@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <QDebug>
 
 using namespace std;
 
@@ -6,10 +7,16 @@ MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow)
 {
+  gridGenerator = GridGenerator();
   currentGrid = SampleGrids::getSampleGrid1();
-//  Solver solver = Solver(&sampleGrid);
+//  Solver solver = Solver(&currentGrid);
 //  solver.solve();
 //  solver.printGrid();
+//  while(solver.doInferanceCycle()){}
+//  solver.checkSectionPossibleCombinationUniqueness(0,8);
+//  solver.printGrid();
+//  for(int i = 0; i < 200; ++i)
+//    qDebug()<<"Random Number "<<GridGenerator::generateRandomNumber(7,24);
   ui->setupUi(this);
 //  QFont f("Ubuntu",15);
 //  for(short row = 0; row < ROW_COUNT; ++row){
@@ -70,5 +77,11 @@ void MainWindow::SampleGridChanged(int index)
     default:
       currentGrid = SampleGrids::getSampleGrid1();
   }
+  displayGrid();
+}
+
+void MainWindow::GenerateGrid()
+{
+  currentGrid = gridGenerator.generateGrid(ui->EmptyCellCountSpinBox->value());
   displayGrid();
 }

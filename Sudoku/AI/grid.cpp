@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <cmath>
+#include <QDebug>
 
 using namespace std;
 
@@ -27,14 +28,14 @@ Square Grid::getSquare(short row, short col) const
 {
   if(row < ROW_COUNT && row >= 0 && col < COLUMN_COUNT && col >= 0)
     return grid[row][col];
-  throw out_of_range("Out of range row or column!s");
+  throw out_of_range("Out of range row or column");
 }
 
 Square *Grid::getSquarePtr(short row, short col)
 {
   if(row < ROW_COUNT && row >= 0 && col < COLUMN_COUNT && col >= 0)
     return &grid[row][col];
-  throw out_of_range("Out of range row or column!s");
+  throw out_of_range("Out of range row or column");
 }
 
 bool Grid::checkIntegrity()

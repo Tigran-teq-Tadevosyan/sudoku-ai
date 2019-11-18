@@ -15,14 +15,17 @@ public:
 
   bool checkRow(short row, short currentColumn);
   bool checkColumn(short row, short currentColumn);
-  bool checkSection(short row, short currentCol);
+  bool checkSection(short currentRow, short currentCol);
+  bool checkSectionPossibleCombinationUniqueness(short row, short currentCol);
 
   bool solve();
+  bool randomSolve();
 
   void printGrid();
   Grid getGrid();
 
   bool BackTrack();
+  bool BackTrackWithRandomFills();
 
 private:
   Grid * grid;

@@ -14,9 +14,12 @@ public:
   bool removePossibleValue(short val); // returns true if val was removed from list
   bool isPossibleValue(short val);
   short setAnyPossibleValue();
+  short setRandomPossibleValue();
   bool possibleValuesLeft();
   void reverseSettelment();
+  void removeValue();
   void printPossibles();
+  void setUniqueSolutionIfSo();
 
   std::vector<short> possibleValues = {1,2,3,4,5,6,7,8,9};
 

@@ -6,6 +6,7 @@
 #include "samplegrids.h"
 #include <iostream>
 #include "AI/solver.h"
+#include "AI/gridgenerator.h"
 
 namespace Ui {
   class MainWindow;
@@ -24,10 +25,12 @@ public:
 public slots:
   void SolveClicked();
   void SampleGridChanged(int index);
+  void GenerateGrid();
 
 private:
   Ui::MainWindow *ui;
   Grid currentGrid;
+  GridGenerator gridGenerator;
 };
 
 #endif // MAINWINDOW_H

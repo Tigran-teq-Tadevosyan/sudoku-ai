@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     AI/grid.cpp \
     samplegrids.cpp \
     AI/goaltest.cpp \
-    AI/solver.cpp
+    AI/solver.cpp \
+    AI/gridgenerator.cpp
 
 HEADERS  += mainwindow.h \
     AI/square.h \
@@ -26,6 +27,7 @@ HEADERS  += mainwindow.h \
     config.h \
     samplegrids.h \
     AI/goaltest.h \
-    AI/solver.h
+    AI/solver.h \
+    AI/gridgenerator.h
 
 FORMS    += mainwindow.ui

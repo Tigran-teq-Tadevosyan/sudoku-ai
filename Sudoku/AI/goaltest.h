@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "grid.h"
+#include "localsearchgrid.h"
 #include "config.h"
 
 class GoalTest

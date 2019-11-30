@@ -24,6 +24,7 @@ public:
 
 public slots:
   void SolveClicked();
+  void LocalBeamSearchSolve();
   void SampleGridChanged(int index);
   void GenerateGrid();
 

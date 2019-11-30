@@ -28,4 +28,3 @@ bool GoalTest::goalState(Grid *grid)
   }
   return true;
 }
-

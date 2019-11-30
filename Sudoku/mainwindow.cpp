@@ -1,5 +1,9 @@
 #include "mainwindow.h"
 #include <QDebug>
+#include "griditemdelegate.h"
+#include "AI/localsearchsolver.h"
+#include "AI/localsearchgrid.h"
+#include "timer.h"
 
 using namespace std;
 
@@ -18,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //  for(int i = 0; i < 200; ++i)
 //    qDebug()<<"Random Number "<<GridGenerator::generateRandomNumber(7,24);
   ui->setupUi(this);
+  ui->GridDisplay->setItemDelegate(new GridItemDelegate(ui->GridDisplay));
 //  QFont f("Ubuntu",15);
 //  for(short row = 0; row < ROW_COUNT; ++row){
 //    for(short col = 0; col < COLUMN_COUNT; ++col){
@@ -46,19 +51,36 @@ void MainWindow::displayGrid()
 
   for(short row = 0; row < ROW_COUNT; ++row){
     for(short col = 0; col < COLUMN_COUNT; ++col){
-      QTableWidgetItem * item =  new QTableWidgetItem(QString::number(currentGrid.getSquare(row,col).getValue()));
+      static QString cellValue;
+      short val = currentGrid.getSquarePtr(row,col)->getValue();
+      if(val == 0)
+        cellValue = "";
+      else
+        cellValue = QString::number(val);
+      QTableWidgetItem * item = new QTableWidgetItem(cellValue);
       item->setTextAlignment(Qt::AlignCenter);
       item->setFont(fnt);
       ui->GridDisplay->setItem(row, col, item);
     }
-    }
+  }
 }
 
 void MainWindow::SolveClicked()
 {
   Solver solver = Solver(&currentGrid);
+  Timer timer;
+  timer.start("Backtracking Solver");
   solver.solve();
+  timer.end();
   currentGrid = solver.getGrid();
+  displayGrid();
+}
+
+void MainWindow::LocalBeamSearchSolve()
+{
+  LocalSearchSolver* localSearchSolver = new LocalSearchSolver(currentGrid);
+  localSearchSolver->solve();
+  currentGrid = *localSearchSolver->getGrid();
   displayGrid();
 }
 

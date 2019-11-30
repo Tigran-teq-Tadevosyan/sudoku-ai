@@ -19,7 +19,11 @@ SOURCES += main.cpp\
     samplegrids.cpp \
     AI/goaltest.cpp \
     AI/solver.cpp \
-    AI/gridgenerator.cpp
+    AI/gridgenerator.cpp \
+    griditemdelegate.cpp \
+    AI/localsearchsolver.cpp \
+    AI/localsearchgrid.cpp \
+    timer.cpp
 
 HEADERS  += mainwindow.h \
     AI/square.h \
@@ -28,6 +32,10 @@ HEADERS  += mainwindow.h \
     samplegrids.h \
     AI/goaltest.h \
     AI/solver.h \
-    AI/gridgenerator.h
+    AI/gridgenerator.h \
+    griditemdelegate.h \
+    AI/localsearchsolver.h \
+    AI/localsearchgrid.h \
+    timer.h
 
 FORMS    += mainwindow.ui

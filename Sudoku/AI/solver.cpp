@@ -18,19 +18,25 @@ bool Solver::doInferanceCycle()
   for(short row = 0; row < ROW_COUNT; ++row){
     for(short col = 0; col < COLUMN_COUNT; ++col){
 
-      if(checkRow(row, col))
-        changed = true;
+        if(checkRow(row, col))
+          changed = true;
 
-      if(checkColumn(row, col))
-        changed = true;
+        if(checkColumn(row, col))
+          changed = true;
 
-      if(checkSection(row, col))
-        changed = true;
+        if(checkSection(row, col))
+          changed = true;
 
-      grid->getSquarePtr(row,col)->setUniqueSolutionIfSo();
+        grid->getSquarePtr(row,col)->setUniqueSolutionIfSo();
 
-      if(checkSectionPossibleCombinationUniqueness(row,col))
-        changed = true;
+        if(checkSectionPossibleCombinationUniqueness(row,col))
+          changed = true;
+
+        if(checkRowPossibleCombinationUniqueness(row,col))
+          changed = true;
+
+        if(checkColumnPossibleCombinationUniqueness(row,col))
+          changed = true;
     }
   }
 
@@ -111,35 +117,92 @@ bool Solver::checkSectionPossibleCombinationUniqueness(short currentRow, short c
           for(auto currentPossiblePtr = currentCellPossibleValues.begin(); currentPossiblePtr != currentCellPossibleValues.end(); ++currentPossiblePtr ){
             if(*currentPossiblePtr == possibleValue){
               otherOptionsExist = true;
-              break;
+              goto JumpOutLabel;
             }
           }
         }
-        if(otherOptionsExist) break;
       }
-      if(otherOptionsExist) break;
     }
-
+    JumpOutLabel:{}
     if(!otherOptionsExist){
       current->setValue(possibleValue);
       return true;
     }
   }
+  return false;
+}
 
+bool Solver::checkRowPossibleCombinationUniqueness(short row, short currentCol)
+{
+  Square * current = grid->getSquarePtr(row, currentCol);
+  if(current->isCertain()) return false;
+
+  for(auto ptr = current->possibleValues.begin(); ptr != current->possibleValues.end(); ++ptr ){
+    short possibleValue = *ptr;
+    bool otherOptionsExist = false;
+
+    for(short col = 0; col < COLUMN_COUNT; ++col){
+      if( !grid->getSquare(row, col).isCertain() && col != currentCol){
+        vector<short> currentCellPossibleValues = grid->getSquarePtr(row,col)->possibleValues;
+
+        for(auto currentPossiblePtr = currentCellPossibleValues.begin(); currentPossiblePtr != currentCellPossibleValues.end(); ++currentPossiblePtr ){
+          if(*currentPossiblePtr == possibleValue){
+            otherOptionsExist = true;
+            goto JumpOutLabel;
+          }
+        }
+      }
+    }
+    JumpOutLabel:{}
+    if(!otherOptionsExist){
+      current->setValue(possibleValue);
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Solver::checkColumnPossibleCombinationUniqueness(short currentRow, short col)
+{
+  Square * current = grid->getSquarePtr(currentRow, col);
+  if(current->isCertain()) return false;
+
+  for(auto ptr = current->possibleValues.begin(); ptr != current->possibleValues.end(); ++ptr ){
+    short possibleValue = *ptr;
+    bool otherOptionsExist = false;
+
+    for(short row = 0; row < ROW_COUNT; ++row){
+      if( !grid->getSquare(row, col).isCertain() && row != currentRow){
+        vector<short> currentCellPossibleValues = grid->getSquarePtr(row,col)->possibleValues;
+
+        for(auto currentPossiblePtr = currentCellPossibleValues.begin(); currentPossiblePtr != currentCellPossibleValues.end(); ++currentPossiblePtr ){
+          if(*currentPossiblePtr == possibleValue){
+            otherOptionsExist = true;
+            goto JumpOutLabel;
+          }
+        }
+      }
+    }
+    JumpOutLabel:{}
+    if(!otherOptionsExist){
+      current->setValue(possibleValue);
+      return true;
+    }
+  }
   return false;
 }
 
 bool Solver::solve()
 {
   if(GoalTest::goalState(grid)) return true;
-  doInferanceCycle();
+  while(doInferanceCycle()){}
   return BackTrack();
 }
 
 bool Solver::randomSolve()
 {
   if(GoalTest::goalState(grid)) return true;
-  doInferanceCycle();
+  while(doInferanceCycle()){}
   return BackTrackWithRandomFills();
 }
 
@@ -155,6 +218,7 @@ Grid Solver::getGrid()
 
 
 bool Solver::BackTrack(){
+  qDebug()<<"BackTrack Cycle";
   static Square *current;
   short value = 0;
   for(short row = 0; row < ROW_COUNT; ++row){

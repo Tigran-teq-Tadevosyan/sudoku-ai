@@ -21,7 +21,7 @@ public:
   void printPossibles();
   void setUniqueSolutionIfSo();
 
-  std::vector<short> possibleValues = {1,2,3,4,5,6,7,8,9};
+  std::vector<short> possibleValues {1,2,3,4,5,6,7,8,9};
 
 private:
   bool certain = false;

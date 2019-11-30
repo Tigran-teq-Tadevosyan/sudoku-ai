@@ -16,7 +16,9 @@ public:
   bool checkRow(short row, short currentColumn);
   bool checkColumn(short row, short currentColumn);
   bool checkSection(short currentRow, short currentCol);
-  bool checkSectionPossibleCombinationUniqueness(short row, short currentCol);
+  bool checkSectionPossibleCombinationUniqueness(short currentRow, short currentCol);
+  bool checkRowPossibleCombinationUniqueness(short row, short currentCol);
+  bool checkColumnPossibleCombinationUniqueness(short currentRow, short col);
 
   bool solve();
   bool randomSolve();

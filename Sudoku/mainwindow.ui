@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>422</width>
-    <height>529</height>
+    <width>425</width>
+    <height>508</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -55,14 +55,14 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>422</width>
-        <height>380</height>
+        <width>425</width>
+        <height>386</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>422</width>
-        <height>380</height>
+        <width>425</width>
+        <height>386</height>
        </size>
       </property>
       <property name="font">
@@ -95,16 +95,16 @@
       <property name="columnCount">
        <number>9</number>
       </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>45</number>
-      </attribute>
       <attribute name="horizontalHeaderMinimumSectionSize">
        <number>45</number>
       </attribute>
-      <attribute name="verticalHeaderDefaultSectionSize">
-       <number>40</number>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>45</number>
       </attribute>
       <attribute name="verticalHeaderMinimumSectionSize">
+       <number>40</number>
+      </attribute>
+      <attribute name="verticalHeaderDefaultSectionSize">
        <number>40</number>
       </attribute>
       <row>
@@ -231,10 +231,10 @@
          </item>
         </widget>
        </item>
-       <item row="3" column="1">
-        <widget class="QPushButton" name="pushButton">
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Solve</string>
+          <string>Filled Cell Count:</string>
          </property>
         </widget>
        </item>
@@ -264,23 +264,30 @@
         </widget>
        </item>
        <item row="3" column="0">
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="text">
+          <string>LBS Solve</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>Solve</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
         <widget class="QPushButton" name="pushButton_2">
          <property name="text">
           <string>Generate</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_2">
+       <item row="3" column="1">
+        <widget class="QPushButton" name="pushButton_4">
          <property name="text">
-          <string>Filled Cell Count:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QPushButton" name="pushButton_3">
-         <property name="text">
-          <string>Local Beam Search Solve</string>
+          <string>Generate Unique</string>
          </property>
         </widget>
        </item>
@@ -316,8 +323,8 @@
    <slot>SolveClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>326</x>
-     <y>473</y>
+     <x>88</x>
+     <y>467</y>
     </hint>
     <hint type="destinationlabel">
      <x>421</x>
@@ -332,8 +339,8 @@
    <slot>GenerateGrid()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>41</x>
-     <y>473</y>
+     <x>158</x>
+     <y>467</y>
     </hint>
     <hint type="destinationlabel">
      <x>0</x>
@@ -348,12 +355,28 @@
    <slot>LocalBeamSearchSolve()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>266</x>
-     <y>486</y>
+     <x>88</x>
+     <y>495</y>
     </hint>
     <hint type="destinationlabel">
-     <x>441</x>
+     <x>421</x>
      <y>291</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>GenerateUniqueGrid()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>237</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>509</x>
+     <y>424</y>
     </hint>
    </hints>
   </connection>
@@ -363,5 +386,6 @@
   <slot>SampleGridChanged(int)</slot>
   <slot>GenerateGrid()</slot>
   <slot>LocalBeamSearchSolve()</slot>
+  <slot>GenerateUniqueGrid()</slot>
  </slots>
 </ui>

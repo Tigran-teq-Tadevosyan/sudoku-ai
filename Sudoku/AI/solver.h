@@ -26,11 +26,15 @@ public:
   void printGrid();
   Grid getGrid();
 
+  int getCycles();
+
   bool BackTrack();
   bool BackTrackWithRandomFills();
 
 private:
   Grid * grid;
+
+  int cycles;
 //  GoalTest goalTest;
 };
 

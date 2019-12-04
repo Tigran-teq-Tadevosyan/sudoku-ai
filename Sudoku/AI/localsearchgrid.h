@@ -10,7 +10,6 @@ class LocalSearchGrid
 public:
   LocalSearchGrid();
   LocalSearchGrid(Grid& copyGrid);
-//  LocalSearchGrid(const LocalSearchGrid& copyGrid);
 
   bool operator <(const LocalSearchGrid& rhs);
 

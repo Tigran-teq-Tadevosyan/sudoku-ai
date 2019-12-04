@@ -3,6 +3,7 @@
 #include <QDebug>
 #include "gridgenerator.h"
 #include <algorithm>
+#include <cmath>
 
 using namespace std;
 

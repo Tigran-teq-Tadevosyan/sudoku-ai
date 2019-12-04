@@ -11,7 +11,6 @@ public:
   void copy(Grid* original);
   Square getSquare(short row, short col) const;
   Square *getSquarePtr(short row, short col);
-  void setSquare(short row, short col, Square square);
   bool checkIntegrity();
 
   void print();

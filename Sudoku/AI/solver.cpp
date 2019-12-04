@@ -29,14 +29,17 @@ bool Solver::doInferanceCycle()
 
         grid->getSquarePtr(row,col)->setUniqueSolutionIfSo();
 
-        if(checkSectionPossibleCombinationUniqueness(row,col))
-          changed = true;
+//        if(checkSectionPossibleCombinationUniqueness(row,col))
+//          changed = true;
 
-        if(checkRowPossibleCombinationUniqueness(row,col))
-          changed = true;
+//        if(checkRowPossibleCombinationUniqueness(row,col))
+//          changed = true;
 
-        if(checkColumnPossibleCombinationUniqueness(row,col))
-          changed = true;
+//        if(checkColumnPossibleCombinationUniqueness(row,col))
+//          changed = true;
+
+        // Checking the second time after additional inferance
+//        grid->getSquarePtr(row,col)->setUniqueSolutionIfSo();
     }
   }
 
@@ -125,7 +128,8 @@ bool Solver::checkSectionPossibleCombinationUniqueness(short currentRow, short c
     }
     JumpOutLabel:{}
     if(!otherOptionsExist){
-      current->setValue(possibleValue);
+      current->possibleValues.clear();
+      current->possibleValues.push_back(possibleValue);
       return true;
     }
   }
@@ -155,7 +159,8 @@ bool Solver::checkRowPossibleCombinationUniqueness(short row, short currentCol)
     }
     JumpOutLabel:{}
     if(!otherOptionsExist){
-      current->setValue(possibleValue);
+      current->possibleValues.clear();
+      current->possibleValues.push_back(possibleValue);
       return true;
     }
   }
@@ -185,7 +190,8 @@ bool Solver::checkColumnPossibleCombinationUniqueness(short currentRow, short co
     }
     JumpOutLabel:{}
     if(!otherOptionsExist){
-      current->setValue(possibleValue);
+      current->possibleValues.clear();
+      current->possibleValues.push_back(possibleValue);
       return true;
     }
   }
@@ -194,6 +200,7 @@ bool Solver::checkColumnPossibleCombinationUniqueness(short currentRow, short co
 
 bool Solver::solve()
 {
+  cycles = 0;
   if(GoalTest::goalState(grid)) return true;
   while(doInferanceCycle()){}
   return BackTrack();
@@ -216,9 +223,14 @@ Grid Solver::getGrid()
   return *grid;
 }
 
+int Solver::getCycles()
+{
+  return cycles;
+}
+
 
 bool Solver::BackTrack(){
-  qDebug()<<"BackTrack Cycle";
+  ++cycles;
   static Square *current;
   short value = 0;
   for(short row = 0; row < ROW_COUNT; ++row){
@@ -234,7 +246,6 @@ bool Solver::BackTrack(){
         value = current->setAnyPossibleValue();
         Grid *cloneGrid = new Grid();
         cloneGrid->copy(grid);
-        if(value == 0) return false;
 
         while(doInferanceCycle()){}
 

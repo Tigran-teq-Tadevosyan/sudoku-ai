@@ -23,7 +23,11 @@ SOURCES += main.cpp\
     griditemdelegate.cpp \
     AI/localsearchsolver.cpp \
     AI/localsearchgrid.cpp \
-    timer.cpp
+    timer.cpp \
+    AI/UniqueGenerator/uniquegenerator.cpp \
+    AI/UniqueGenerator/chain.cpp \
+    AI/UniqueGenerator/cell.cpp \
+    AI/UniqueGenerator/cellpossiblevalues.cpp
 
 HEADERS  += mainwindow.h \
     AI/square.h \
@@ -36,6 +40,10 @@ HEADERS  += mainwindow.h \
     griditemdelegate.h \
     AI/localsearchsolver.h \
     AI/localsearchgrid.h \
-    timer.h
+    timer.h \
+    AI/UniqueGenerator/uniquegenerator.h \
+    AI/UniqueGenerator/chain.h \
+    AI/UniqueGenerator/cell.h \
+    AI/UniqueGenerator/cellpossiblevalues.h
 
 FORMS    += mainwindow.ui

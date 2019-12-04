@@ -27,6 +27,7 @@ public slots:
   void LocalBeamSearchSolve();
   void SampleGridChanged(int index);
   void GenerateGrid();
+  void GenerateUniqueGrid();
 
 private:
   Ui::MainWindow *ui;

@@ -1,6 +1,6 @@
 #include "uniquegenerator.h"
 #include <QDebug>
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 #include <iostream>
 #include <algorithm>
 #include "cellpossiblevalues.h"
@@ -14,7 +14,7 @@ UniqueGenerator::UniqueGenerator(Grid &grid)
   UnstudiedSet.clear();
   for(unsigned short row = 0; row < ROW_COUNT; ++row){
     for(unsigned short col = 0; col < COLUMN_COUNT; ++col){
-        UnstudiedSet.push_back(new Cell{row, col, grid.getSquarePtr(row,col)->getValue()});
+        UnstudiedSet.push_back(new Cell{row, col, static_cast<unsigned short>(grid.getSquarePtr(row,col)->getValue())});
     }
   }
 

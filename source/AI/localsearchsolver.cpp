@@ -2,7 +2,6 @@
 #include "square.h"
 #include <QDebug>
 #include "gridgenerator.h"
-#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -14,6 +13,10 @@ LocalSearchSolver::LocalSearchSolver(Grid& copyGrid)
 LocalSearchSolver::~LocalSearchSolver()
 {
   delete grid;
+}
+
+bool LocalSearchGrid_Comperator(LocalSearchGrid const& lhs, LocalSearchGrid const& rhs) {
+    return lhs.getCost() < rhs.getCost();
 }
 
 void LocalSearchSolver::solve()
@@ -38,7 +41,7 @@ void LocalSearchSolver::solve()
         beamDescendantsArray[(index+1) * 5 + tryCount].doRandomSwap();
       }
     }
-    sort(beamDescendantsArray, beamDescendantsArray + 30);
+    sort(beamDescendantsArray, beamDescendantsArray + 30, LocalSearchGrid_Comperator);
     beamArray[0] = beamDescendantsArray[0];
     beamArray[1] = beamDescendantsArray[1];
     beamArray[2] = beamDescendantsArray[2];
@@ -47,15 +50,6 @@ void LocalSearchSolver::solve()
     qDebug()<<"Cost -> "<<beamDescendantsArray[0].getCost();
   } while(beamDescendantsArray[0].getCost() > 2);
   grid = &beamDescendantsArray[0];
-
-//  cost = grid->getCost();
-//  while(cost > 8){
-//    grid->doRandomSwap();
-//    if(grid->getCost() > cost/* && GridGenerator::generateRandomNumber(1,20) > 1*/)
-//      grid->reverseLastSwap();
-//    cost = grid->getCost();
-//    qDebug()<<"Cost "<<cost;
-//  }
 }
 
 Grid *LocalSearchSolver::getGrid()

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>425</width>
-    <height>508</height>
+    <height>535</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -26,7 +26,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Sudoku AI</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
